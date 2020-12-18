@@ -1,0 +1,61 @@
+.todo {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  max-width: 1900px;
+  background-color: rgba(255, 0, 0, 0.24);
+  margin: 10px 40px 10px 10px;
+  border-radius: 5px;
+  cursor: grab;
+}
+
+.string {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+.string input {
+  margin-left: 20px;
+}
+
+.string span {
+  margin-left: 10px;
+}
+
+.string {
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.editInput {
+  border: none;
+  outline: none;
+  height: 25px;
+}
+
+.func {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.textTodo {
+  min-height: 20px;
+}
+
+@media (max-width: 570px) {
+  .todo {
+    margin: 10px 10px 10px 10px;
+  }
+  .ul {
+    padding: 0px;
+  }
+}
+
+@media (max-width: 356px) {
+  .editInput {
+    width: 150px;
+  }
+}
