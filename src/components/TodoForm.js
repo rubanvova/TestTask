@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import styles from './TodoForm.module.css';
 
-export const TodoForm = ({ onAdd }) => {
+const TodoForm = ({ onAdd }) => {
   const [title, setTitle] = useState('');
 
   const changeHandler = (event) => {
@@ -33,3 +33,5 @@ export const TodoForm = ({ onAdd }) => {
     </div>
   );
 };
+
+export default memo(TodoForm);

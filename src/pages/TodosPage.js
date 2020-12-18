@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { TodoForm } from '../components/TodoForm';
+import React, { useState, useEffect, useCallback } from 'react';
+import TodoForm from '../components/TodoForm';
 import { TodoList } from '../components/TodoList';
 
 export const TodosPage = () => {
@@ -15,28 +15,34 @@ export const TodosPage = () => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const addHandler = (title) => {
-    const or = todos.length;
-    const newTodo = {
-      title: title,
-      id: Date.now(),
-      completed: false,
-      edit: ShowEdit,
-      order: or,
-    };
-    setTodos((prev) => [newTodo, ...prev]);
-  };
+  const addHandler = useCallback(
+    (title) => {
+      const or = todos.length;
+      const newTodo = {
+        title: title,
+        id: Date.now(),
+        completed: false,
+        edit: false,
+        order: or,
+      };
+      setTodos((prev) => [newTodo, ...prev]);
+    },
+    [setTodos, todos.length]
+  );
 
-  const editTodo = (text, id) => {
-    setTodos((prev) =>
-      prev.map((todo) => {
-        if (todo.id === id) {
-          todo.title = text;
-        }
-        return todo;
-      })
-    );
-  };
+  const editTodo = useCallback(
+    (text, id) => {
+      setTodos((prev) =>
+        prev.map((todo) => {
+          if (todo.id === id) {
+            todo.title = text;
+          }
+          return todo;
+        })
+      );
+    },
+    [setTodos]
+  );
 
   const showEditInput = (id) => {
     setTodos((prev) =>
@@ -50,24 +56,30 @@ export const TodosPage = () => {
     );
   };
 
-  const toggleHandler = (id, completed) => {
-    setTodos((prev) =>
-      prev.map((todo) => {
-        if (todo.id === id) {
-          todo.completed = !completed;
-        }
-        return todo;
-      })
-    );
-  };
+  const toggleHandler = useCallback(
+    (id, completed) => {
+      setTodos((prev) =>
+        prev.map((todo) => {
+          if (todo.id === id) {
+            todo.completed = !completed;
+          }
+          return todo;
+        })
+      );
+    },
+    [setTodos]
+  );
 
-  const removeHandler = (id) => {
-    // eslint-disable-next-line no-restricted-globals
-    let chek = confirm('Вы уерены?');
-    if (chek) {
-      setTodos((prev) => prev.filter((todo) => todo.id !== id));
-    }
-  };
+  const removeHandler = useCallback(
+    (id) => {
+      // eslint-disable-next-line no-restricted-globals
+      let chek = confirm('Вы уерены?');
+      if (chek) {
+        setTodos((prev) => prev.filter((todo) => todo.id !== id));
+      }
+    },
+    [setTodos]
+  );
 
   return (
     <>

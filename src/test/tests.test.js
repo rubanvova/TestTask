@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { sortTodos } from '../components/TodoList';
-import { TodoForm } from '../components/TodoForm';
+import TodoForm from '../components/TodoForm';
 
 describe('TodoList', () => {
   test('sort', () => {
